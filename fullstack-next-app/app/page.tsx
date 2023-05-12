@@ -9,8 +9,10 @@ async function getPosts() {
 }
 
 export default async function Home() {
-  const data = await getPosts()
-  console.log(data)
+  const data : { 
+    id: number,
+    title: string,
+  }[] = await getPosts()
 
   return (
     <main className="px-48 py-8">
@@ -19,6 +21,9 @@ export default async function Home() {
         href={"/dashboard"}>
         Go to the dashboard
       </Link>
+      {data.map(post => (
+        <h1 className="py-6 text-lg">{post.title}</h1>
+      ))}
     </main>
   )
 }
